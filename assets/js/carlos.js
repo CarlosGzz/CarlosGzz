@@ -220,7 +220,18 @@ let isFormComplete = (form) => {
    return true;
 };
 
+runprogressbar = () => {
+   $("#contact-form-sent-progress").show();
+   for (x = 0; x < 100; x++) {
+      setTimeout(function () {
+         $("#contact-form-progress-bar").width(x + "%");
+      }, 50);
+   }
+};
+
 $("#contact-form").submit(function (e) {
+   $("#contact-form-row").hide();
+   runprogressbar();
    e.preventDefault(); // avoid to execute the actual submit of the form.
 
    var form = $(this);
@@ -231,14 +242,21 @@ $("#contact-form").submit(function (e) {
          name: form[0][0].value.trim(),
          email: form[0][1].value.trim(),
          message: form[0][2].value.trim(),
-      }
+      };
       $.ajax({
          type: "POST",
+         dataType: "json",
          url: url,
-         data: JSON.stringify(mappedData), // serializes the form's elements.
+         data: {submit: mappedData},
          success: function (data) {
-            alert(data); // show response from the php script.
+            $("#contact-form-sent-progress").hide();
+            $("#contact-form-sent").show();
          },
+         error: function(e){
+            $("#contact-form-sent-progress").hide();
+            $("#contact-form-sent").show();
+            console.log("error", e);
+        }
       });
    }
 });
