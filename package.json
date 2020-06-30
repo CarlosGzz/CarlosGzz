@@ -13,9 +13,5 @@
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-open": "^3.0.1"
-  },
-  "scripts": {
-    "start": "node index.js"
- }
- 
+  }
 }
