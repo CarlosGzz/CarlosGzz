@@ -254,7 +254,7 @@ $("#contact-form").submit(function (e) {
          },
          error: function(e){
             $("#contact-form-sent-progress").hide();
-            $("#contact-form-sent").show();
+            $("#contact-form-error").show();
             console.log("error", e);
         }
       });
